@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rive Animation</title>
+    <script src="https://unpkg.com/@rive-app/canvas"></script>
+</head>
+<body>
+    <canvas id="riveCanvas" width="500" height="500"></canvas>
+    <script>
+        const r = new rive.Rive({
+            src: "character.riv", // 파일 경로를 실제 위치로 변경해야 함
+            canvas: document.getElementById("riveCanvas"),
+            autoplay: true,
+        });
+    </script>
+</body>
+</html>
