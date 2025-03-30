@@ -1,18 +1,49 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rive Animation</title>
     <script src="https://unpkg.com/@rive-app/canvas"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #222;
+        }
+        canvas {
+            border: 1px solid white;
+        }
+    </style>
 </head>
 <body>
     <canvas id="riveCanvas" width="500" height="500"></canvas>
+
     <script>
-        const r = new rive.Rive({
-            src: "character.riv", // 파일 경로를 실제 위치로 변경해야 함
-            canvas: document.getElementById("riveCanvas"),
-            autoplay: true,
+        document.addEventListener("DOMContentLoaded", async () => {
+            const r = new rive.Rive({
+                src: "character.riv", // Rive 파일 경로
+                canvas: document.getElementById("riveCanvas"),
+                autoplay: true,
+                stateMachines: "State Machine 1", // State Machine 이름 추가
+                onLoad: () => {
+                    console.log("Rive 로드 완료");
+
+                    // 마우스 이벤트 리스너 등록
+                    document.addEventListener("pointermove", (event) => {
+                        const { clientX, clientY } = event;
+                        const inputs = r.stateMachineInputs("State Machine 1");
+                        const xInput = inputs.find(input => input.name === "cursorX");
+                        const yInput = inputs.find(input => input.name === "cursorY");
+
+                        if (xInput) xInput.value = clientX;
+                        if (yInput) yInput.value = clientY;
+                    });
+                }
+            });
         });
     </script>
 </body>
