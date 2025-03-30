@@ -24,24 +24,39 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
+            // Rive 애니메이션 객체 생성
             const r = new rive.Rive({
-                src: "character.riv", // Rive 파일 경로
-                canvas: document.getElementById("riveCanvas"),
-                autoplay: true,
-                stateMachines: "State Machine 1", // State Machine 이름 추가
-                onLoad: () => {
+                src: "character.riv", // Rive 애니메이션 파일 경로
+                canvas: document.getElementById("riveCanvas"), // 애니메이션을 표시할 캔버스 요소
+                autoplay: true, // 자동 재생 활성화
+                stateMachines: "State Machine 1", // 사용할 State Machine 이름 설정
+                onLoad: () => { // 애니메이션이 로드된 후 실행할 코드
                     console.log("Rive 로드 완료");
 
                     // 마우스 이벤트 리스너 등록
                     document.addEventListener("pointermove", (event) => {
-                        const { clientX, clientY } = event;
-                        const inputs = r.stateMachineInputs("State Machine 1");
-                        const xInput = inputs.find(input => input.name === "cursorX");
-                        const yInput = inputs.find(input => input.name === "cursorY");
+                        const { clientX, clientY } = event; // 마우스 커서의 현재 위치 가져오기
 
+                        // State Machine의 입력 값을 가져오기
+                        const inputs = r.stateMachineInputs("State Machine 1");
+                        const xInput = inputs.find(input => input.name === "cursorX"); // cursorX 입력 찾기
+                        const yInput = inputs.find(input => input.name === "cursorY"); // cursorY 입력 찾기
+
+                        // 입력값을 마우스 위치에 맞게 업데이트
                         if (xInput) xInput.value = clientX;
                         if (yInput) yInput.value = clientY;
                     });
+
+                    // 트리거 감지
+                    setInterval(() => {
+                        const inputs = r.stateMachineInputs("State Machine 1");
+                        const buttonTrigger = inputs.find(input => input.name === "Button_001_T"); // Button_001_T 트리거 찾기
+                        
+                        if (buttonTrigger && buttonTrigger.value === 1) { // 트리거가 fire 됐을 때
+                            window.open("https://youtu.be/mQwyBJG8wjk?si=J5tddfNzNEM1zyAK", "_blank"); // 새 창 열기
+                            buttonTrigger.value = 0; // 트리거 값을 다시 초기화 (필요한 경우)
+                        }
+                    }, 50); // 50ms마다 상태를 체크
                 }
             });
         });
