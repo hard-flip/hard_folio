@@ -22,32 +22,43 @@
 <body>
     <canvas id="riveCanvas" width="500" height="800"></canvas>
 
+
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
+            const riveCanvas = document.getElementById("riveCanvas");
+    
             const r = new rive.Rive({
                 src: "character.riv",
-                canvas: document.getElementById("riveCanvas"),
+                canvas: riveCanvas,
                 autoplay: true,
                 stateMachines: "State Machine 1",
                 onLoad: () => {
                     console.log("Rive 로드 완료");
-
-                    const inputs = r.stateMachineInputs("State Machine 1");
-                    const starSelectInput = inputs.find(input => input.name === "Button_001_T");
-
-                    const checkBooleanValue = () => {
-                        if (starSelectInput && starSelectInput.value === true) {
-                            window.open("https://youtu.be/mQwyBJG8wjk?si=hv2W-TkBIFRdIf2l", "_blank");
-                            setTimeout(() => {
-                                starSelectInput.value = false; // 다시 false로 초기화
-                            }, 500);
+    
+                    // 애니메이션이 완전히 로드된 후 입력값 가져오기
+                    setTimeout(() => {
+                        const inputs = r.stateMachineInputs("State Machine 1");
+                        if (!inputs) {
+                            console.error("State Machine 입력값을 가져올 수 없음!");
+                            return;
                         }
-                    };
-
-                    setInterval(checkBooleanValue, 300);
+    
+                        const starSelectInput = inputs.find(input => input.name === "Button_001_T");
+    
+                        // 불리언 값이 true가 되었는지 감지하는 함수
+                        const checkBooleanValue = () => {
+                            if (starSelectInput && starSelectInput.value === true) {
+                                window.open("https://www.naver.com/", "_blank");
+                            }
+                        };
+    
+                        // 주기적으로 상태 확인 (예: 100ms마다 체크)
+                        setInterval(checkBooleanValue, 100);
+                    }, 100); // 약간의 지연 추가
                 }
             });
         });
     </script>
+    
 </body>
 </html>
