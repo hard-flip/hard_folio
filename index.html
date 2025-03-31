@@ -48,17 +48,20 @@
                         // 불리언 값이 true가 되었는지 감지하는 함수
                         const checkBooleanValue = () => {
                             if (starSelectInput && starSelectInput.value === true) {
-                                window.open("www.youtube.com/@hard_flip", "_blank");
+                                window.open("https://www.youtube.com/@hard_flip", "_blank");
+                                // 페이지가 열렸으므로 interval 중지
+                                clearInterval(intervalId);
                             }
                         };
     
                         // 주기적으로 상태 확인 (예: 100ms마다 체크)
-                        setInterval(checkBooleanValue, 100);
+                        const intervalId = setInterval(checkBooleanValue, 100);
                     }, 100); // 약간의 지연 추가
                 }
             });
         });
     </script>
+    
     
 </body>
 </html>
