@@ -50,7 +50,9 @@
 
                         const checkBooleanValue = () => {
                             if (starSelectInput && starSelectInput.value === true && !opened) {
-                                window.open("https://youtu.be/a27HEzuO4fU?si=SOAfa61CQIjvcwC2", "_blank", "noopener,noreferrer");
+                                const windowName = "popup_" + Date.now(); // 항상 다른 창 이름 사용
+                                window.open("https://youtu.be/a27HEzuO4fU?si=SOAfa61CQIjvcwC2", windowName, "noopener,noreferrer");
+                                
                                 opened = true; // 창이 열린 상태로 설정
 
                                 // 일정 시간 후 "Button_001_T" 값을 false로 변경
@@ -60,6 +62,7 @@
                                 }, 1000); // 1초 후 초기화 (필요에 따라 조정 가능)
                             }
                         };
+
 
     
                         // 주기적으로 상태 확인 (예: 100ms마다 체크)
