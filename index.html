@@ -50,8 +50,13 @@
 
                         const checkBooleanValue = () => {
                             if (starSelectInput && starSelectInput.value === true && !opened) {
-                                const windowName = "popup_" + Date.now(); // 항상 다른 창 이름 사용
-                                window.open("https://youtu.be/mQwyBJG8wjk", windowName, "noopener,noreferrer");
+                                // 창을 강제로 새로 열기
+                                const newWindow = window.open("about:blank", "_blank", "noopener,noreferrer");
+
+                                // 새로 열린 창에서 URL 변경
+                                if (newWindow) {
+                                    newWindow.location.href = "https://youtu.be/mQwyBJG8wjk"; // URL 변경
+                                }
                                 
                                 opened = true; // 창이 열린 상태로 설정
 
@@ -62,6 +67,7 @@
                                 }, 1000); // 1초 후 초기화 (필요에 따라 조정 가능)
                             }
                         };
+
 
 
     
