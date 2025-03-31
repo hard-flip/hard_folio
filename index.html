@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +22,6 @@
 </head>
 <body>
     <canvas id="riveCanvas" width="500" height="800"></canvas>
-
 
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
@@ -47,19 +47,12 @@
     
                         // 불리언 값이 true가 되었는지 감지하는 함수
                         let opened = false; // 창이 한 번만 열리도록 하는 플래그 변수
-
                         const checkBooleanValue = () => {
                             if (starSelectInput && starSelectInput.value === true && !opened) {
-                                // 창을 강제로 새로 열기
-                                const newWindow = window.open("about:blank", "_blank", "noopener,noreferrer");
-
-                                // 새로 열린 창에서 URL 변경
-                                if (newWindow) {
-                                    newWindow.location.href = "https://youtu.be/mQwyBJG8wjk"; // URL 변경
-                                }
+                                const windowName = "popup_" + Date.now(); // 항상 다른 창 이름 사용
+                                window.open("https://youtu.be/mQwyBJG8wjk?si=uXP1jowTX1iDpoGI", windowName, "noopener,noreferrer");
                                 
                                 opened = true; // 창이 열린 상태로 설정
-
                                 // 일정 시간 후 "Button_001_T" 값을 false로 변경
                                 setTimeout(() => {
                                     starSelectInput.value = false;
@@ -67,8 +60,6 @@
                                 }, 1000); // 1초 후 초기화 (필요에 따라 조정 가능)
                             }
                         };
-
-
 
     
                         // 주기적으로 상태 확인 (예: 100ms마다 체크)
