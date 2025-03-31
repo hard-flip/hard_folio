@@ -46,13 +46,21 @@
                         const starSelectInput = inputs.find(input => input.name === "Button_001_T");
     
                         // 불리언 값이 true가 되었는지 감지하는 함수
+                        let opened = false; // 창이 한 번만 열리도록 하는 플래그 변수
+
                         const checkBooleanValue = () => {
-                            if (starSelectInput && starSelectInput.value === true) {
+                            if (starSelectInput && starSelectInput.value === true && !opened) {
                                 window.open("https://www.youtube.com/@hard_flip", "_blank", "noopener,noreferrer");
-                                // 페이지가 열렸으므로 interval 중지
-                                clearInterval(intervalId);
+                                opened = true; // 창이 열린 상태로 설정
+
+                                // 일정 시간 후 "Button_001_T" 값을 false로 변경
+                                setTimeout(() => {
+                                    starSelectInput.value = false;
+                                    opened = false; // 다시 창을 열 수 있도록 초기화
+                                }, 1000); // 1초 후 초기화 (필요에 따라 조정 가능)
                             }
                         };
+
     
                         // 주기적으로 상태 확인 (예: 100ms마다 체크)
                         const intervalId = setInterval(checkBooleanValue, 100);
