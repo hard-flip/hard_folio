@@ -22,7 +22,6 @@
 </head>
 <body>
     <canvas id="riveCanvas" width="500" height="800"></canvas>
-
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
             const riveCanvas = document.getElementById("riveCanvas");
@@ -60,7 +59,6 @@
                                 }, 1000); // 1초 후 초기화 (필요에 따라 조정 가능)
                             }
                         };
-
     
                         // 주기적으로 상태 확인 (예: 100ms마다 체크)
                         const intervalId = setInterval(checkBooleanValue, 100);
