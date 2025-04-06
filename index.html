@@ -79,32 +79,46 @@
 
           loader.style.display = "none";
           riveCanvas.style.display = "block";
-
           setTimeout(() => {
-            const inputs = r.stateMachineInputs("State Machine 1");
-            if (!inputs) {
-              console.error("State Machine 입력값을 가져올 수 없음!");
-              return;
-            }
+                const inputs = r.stateMachineInputs("State Machine 1");
+                if (!inputs) {
+                    console.error("State Machine 입력값을 가져올 수 없음!");
+                    return;
+                }
 
-            const starSelectInput = inputs.find(input => input.name === "Button_001_B");
+                const starSelectInput1 = inputs.find(input => input.name === "Button_001_B");
+                const starSelectInput2 = inputs.find(input => input.name === "Button_002_B");
 
-            let opened = false;
-            const checkBooleanValue = () => {
-              if (starSelectInput && starSelectInput.value === true && !opened) {
-                const windowName = "popup_" + Date.now();
-                window.open("https://youtu.be/k6YAm6Z7FY4", windowName, "noopener,noreferrer");
+                let opened1 = false;
+                let opened2 = false;
 
-                opened = true;
-                setTimeout(() => {
-                  starSelectInput.value = false;
-                  opened = false;
-                }, 1000);
-              }
-            };
+                const checkBooleanValue = () => {
+                    if (starSelectInput1 && starSelectInput1.value === true && !opened1) {
+                    const windowName = "popup_1_" + Date.now();
+                    window.open("https://youtube.com/shorts/Xks4s3i8bGs?feature=share", windowName, "noopener,noreferrer");
 
-            setInterval(checkBooleanValue, 100);
-          }, 100);
+                    opened1 = true;
+                    setTimeout(() => {
+                        starSelectInput1.value = false;
+                        opened1 = false;
+                    }, 1000);
+                    }
+
+                    if (starSelectInput2 && starSelectInput2.value === true && !opened2) {
+                    const windowName = "popup_2_" + Date.now();
+                    window.open("https://naver.me/F1rfESey", windowName, "noopener,noreferrer");
+
+                    opened2 = true;
+                    setTimeout(() => {
+                        starSelectInput2.value = false;
+                        opened2 = false;
+                    }, 1000);
+                    }
+                };
+
+  setInterval(checkBooleanValue, 100);
+}, 100);
+
         }
       });
     });
