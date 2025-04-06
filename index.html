@@ -6,14 +6,18 @@
   <title>Rive Animation with Loader</title>
   <script src="https://unpkg.com/@rive-app/canvas"></script>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       height: 100vh;
       background-color: #222;
-      flex-direction: column;
     }
 
     #loader {
@@ -44,6 +48,10 @@
     canvas {
       border: 1px solid white;
       display: none; /* 초기엔 숨김 */
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      aspect-ratio: 5 / 8; /* 500x800 비율 유지 */
     }
   </style>
 </head>
@@ -69,11 +77,9 @@
         onLoad: () => {
           console.log("Rive 로드 완료");
 
-          // 로딩 화면 숨기고 캔버스 보여주기
           loader.style.display = "none";
           riveCanvas.style.display = "block";
 
-          // 애니메이션 로딩 후 입력 처리
           setTimeout(() => {
             const inputs = r.stateMachineInputs("State Machine 1");
             if (!inputs) {
